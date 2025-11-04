@@ -96,10 +96,12 @@ public class ServeurChat extends Serveur {
         String s = "";
         return s;
     }
-    public void envoyerATousSauf(String str, String aliasExpediteur){
-        if (!aliasExpediteur.equals(aliasExpediteur)){
-            System.out.println(str);
-            System.out.flush();
+    public void envoyerATousSauf(String str, String aliasExpediteur) {
+        for(Connexion cnx:connectes) {
+            if (!cnx.getAlias().equals(aliasExpediteur)) {
+                System.out.println(str);
+                System.out.flush();
+            }
         }
     }
 }
