@@ -14,7 +14,6 @@ import com.commun.net.Connexion;
  */
 public class GestionnaireEvenementServeur implements GestionnaireEvenement {
     private Serveur serveur;
-
     /**
      * Construit un gestionnaire d'�v�nements pour un serveur.
      *
@@ -55,6 +54,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     aliasExpediteur = cnx.getAlias();
                     String messageEnvoye = aliasExpediteur + ">> " + texteMessage;
                     serveur.envoyerATousSauf(messageEnvoye, aliasExpediteur);
+                    serveur.ajouterHistorique(messageEnvoye);
                     break;
 
                 default: //Renvoyer le texte recu convertit en majuscules :

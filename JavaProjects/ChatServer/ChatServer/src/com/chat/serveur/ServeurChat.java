@@ -2,6 +2,8 @@ package com.chat.serveur;
 
 import com.commun.net.Connexion;
 
+import java.util.Vector;
+
 /**
  * Cette classe étend (hérite) la classe abstraite Serveur et y ajoute le nécessaire pour que le
  * serveur soit un serveur de chat.
@@ -17,9 +19,9 @@ public class ServeurChat extends Serveur {
      *
      * @param port int Port d'écoute du serveur
      */
+    Vector<String> historique = new Vector<String>();
     public ServeurChat(int port) {
         super(port);
-        this.gestionnaireEvenementServeur = new GestionnaireEvenementServeur(this);
     }
 
     @Override
@@ -95,6 +97,9 @@ public class ServeurChat extends Serveur {
      */
     public String historique() {
         String s = "";
+        for (String msg : historique) {
+            s += msg + "\n";
+        }
         return s;
     }
     public void envoyerATousSauf(String str, String aliasExpediteur) {
@@ -103,5 +108,8 @@ public class ServeurChat extends Serveur {
                 cnx.envoyer(str);
             }
         }
+    }
+    public void ajouterHistorique(String msg) {
+        historique.add(msg);
     }
 }
