@@ -19,6 +19,7 @@ public class ServeurChat extends Serveur {
      */
     public ServeurChat(int port) {
         super(port);
+        this.gestionnaireEvenementServeur = new GestionnaireEvenementServeur(this);
     }
 
     @Override
@@ -99,8 +100,7 @@ public class ServeurChat extends Serveur {
     public void envoyerATousSauf(String str, String aliasExpediteur) {
         for(Connexion cnx:connectes) {
             if (!cnx.getAlias().equals(aliasExpediteur)) {
-                System.out.println(str);
-                System.out.flush();
+                cnx.envoyer(str);
             }
         }
     }
