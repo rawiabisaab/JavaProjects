@@ -57,6 +57,31 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     serveur.ajouterHistorique(messageEnvoye);
                     break;
 
+                case "JOIN" : //Traite les invitations
+
+                    aliasExpediteur = cnx.getAlias();
+                    String alias2 = evenement.getArgument();
+
+                    if (serveur.existeInvitation(alias2, aliasExpediteur)) {
+
+                        serveur.supprimerInvitation(alias2, aliasExpediteur);
+
+                        serveur.creerSalonPrive(aliasExpediteur, alias2);
+
+                        serveur.envoyerA(aliasExpediteur, "Salon privé avec : " + alias2);
+                        serveur.envoyerA(alias2, "Salon avec : " + aliasExpediteur);
+                }
+                    else {
+
+                        serveur.ajouterInvitation(aliasExpediteur, alias2);
+
+                        serveur.envoyerA(alias2, "Invitation de : " + aliasExpediteur);
+
+                    }
+
+                    break;
+
+
                 default: //Renvoyer le texte recu convertit en majuscules :
                     msg = (evenement.getType() + " " + evenement.getArgument()).toUpperCase();
                     cnx.envoyer(msg);

@@ -24,6 +24,7 @@ public class SalonPrive {
         this.guest = guest;
     }
 
+    //Verifie si les salons regroupent les memes noms d'hotes et d'invites
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

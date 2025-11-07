@@ -2,6 +2,8 @@ package com.chat.serveur;
 
 import com.commun.net.Connexion;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -20,6 +22,8 @@ public class ServeurChat extends Serveur {
      * @param port int Port d'écoute du serveur
      */
     Vector<String> historique = new Vector<String>();
+    private List<Invitation> invitations = new ArrayList<>();
+    private List<SalonPrive> salonsPrives = new ArrayList<>();
     public ServeurChat(int port) {
         super(port);
     }
@@ -109,7 +113,35 @@ public class ServeurChat extends Serveur {
             }
         }
     }
+    public void envoyerA (String alias, String msg){
+         for (Connexion cnx:connectes) {
+             if (cnx.getAlias().equals(alias)) {
+                 cnx.envoyer(msg);
+             }
+         }
+    }
+
     public void ajouterHistorique(String msg) {
         historique.add(msg);
     }
+
+    public boolean existeInvitation(String host, String guest) {
+        return invitations.contains(new Invitation(host, guest));
+    }
+
+    public void ajouterInvitation (String host, String guest) {
+        Invitation inv = new Invitation(host, guest);
+        invitations.add(inv);
+    }
+
+    public void supprimerInvitation(String host, String guest) {
+        Invitation inv = new Invitation(host, guest);
+        invitations.remove(inv);
+    }
+
+    public void creerSalonPrive(String alias1, String alias2) {
+        salonsPrives.add(new SalonPrive(alias1, alias2));
+    }
+
 }
+
