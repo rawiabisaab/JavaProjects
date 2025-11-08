@@ -81,6 +81,19 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                     break;
 
+                case "DECLINE" :
+                   String alias1 = cnx.getAlias();
+                   alias2 = evenement.getArgument();
+
+                   if (serveur.existeInvitation(alias2, alias1)) {
+                       serveur.supprimerInvitation(alias2, alias1);
+                       serveur.envoyerA(alias2, "Invitation avec : " + alias1 + " refusée");
+                   }  else if (serveur.existeInvitation(alias1, alias2)) {
+                       serveur.supprimerInvitation(alias1, alias2);
+                       serveur.envoyerA(alias1, "Invitation annulée");
+                   }
+
+
 
                 default: //Renvoyer le texte recu convertit en majuscules :
                     msg = (evenement.getType() + " " + evenement.getArgument()).toUpperCase();
