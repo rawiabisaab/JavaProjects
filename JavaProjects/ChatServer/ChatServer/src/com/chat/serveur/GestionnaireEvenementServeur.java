@@ -32,7 +32,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
     public void traiter(Evenement evenement) {
         Object source = evenement.getSource();
         Connexion cnx;
-        String msg, typeEvenement, aliasExpediteur;
+        String msg = "", typeEvenement, aliasExpediteur, alias2 = "";
         ServeurChat serveur = (ServeurChat) this.serveur;
 
         if (source instanceof Connexion) {
@@ -60,7 +60,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                 case "JOIN" : //Traite les invitations
 
                     aliasExpediteur = cnx.getAlias();
-                    String alias2 = evenement.getArgument();
+                    alias2 = evenement.getArgument();
 
                     if (serveur.existeInvitation(alias2, aliasExpediteur)) {
 
@@ -81,7 +81,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                     break;
 
-                case "DECLINE" :
+                case "DECLINE" : //Permet de refuser ou d'annuler les invitations
                    String alias1 = cnx.getAlias();
                    alias2 = evenement.getArgument();
 
@@ -97,12 +97,28 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                     break;
 
-                case "INV" :
+                case "INV" :// Permet d'afficher toutes les invitations destinee a l'utilisateur
                  aliasExpediteur = cnx.getAlias();
                  String listeInv = serveur.listeInvitations(aliasExpediteur);
                  cnx.envoyer("INV " + listeInv);
                  break;
 
+                case "PRV" : //Permet d'envoyer
+
+                    aliasExpediteur = cnx.getAlias();
+                    String arg = evenement.getArgument();
+
+                    String[] parts = arg.split(" ", 2);
+                    if (parts.length == 2) {
+                        alias2 = parts[0];
+                        msg = parts[1];
+                    }
+                    if (serveur.existeSalon(aliasExpediteur,alias2)) {
+                        serveur.envoyerA(aliasExpediteur, alias2);
+                        serveur.envoyerA(alias2, ">> " + msg);
+                    } else {
+                        serveur.envoyerA(aliasExpediteur, "Salon inexistant");
+                    }
 
 
                 default: //Renvoyer le texte recu convertit en majuscules :

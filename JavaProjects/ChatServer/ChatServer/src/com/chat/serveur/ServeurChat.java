@@ -153,5 +153,11 @@ public class ServeurChat extends Serveur {
         return sb.toString();
     }
 
+    public boolean existeSalon(String host, String guest) {
+        SalonPrive salonRecherche = new SalonPrive(host, guest);
+        return salonsPrives.contains(salonRecherche);
+    }
+
+
 }
 
