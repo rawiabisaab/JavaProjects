@@ -91,7 +91,17 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                    }  else if (serveur.existeInvitation(alias1, alias2)) {
                        serveur.supprimerInvitation(alias1, alias2);
                        serveur.envoyerA(alias1, "Invitation annulée");
+                   } else{
+                       cnx.envoyer("Aucune invitation trouvée entre " + alias1 + " et " + alias2);
                    }
+
+                    break;
+
+                case "INV" :
+                 aliasExpediteur = cnx.getAlias();
+                 String listeInv = serveur.listeInvitations(aliasExpediteur);
+                 cnx.envoyer("INV " + listeInv);
+                 break;
 
 
 

@@ -143,5 +143,15 @@ public class ServeurChat extends Serveur {
         salonsPrives.add(new SalonPrive(alias1, alias2));
     }
 
+    public String listeInvitations(String alias){
+        StringBuilder sb = new StringBuilder();
+        for (Invitation inv:invitations){
+            if (inv.getGuest().equals(alias)){
+                sb.append(inv.getHost()).append(":");
+            }
+        }
+        return sb.toString();
+    }
+
 }
 
