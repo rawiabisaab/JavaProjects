@@ -103,7 +103,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                  cnx.envoyer("INV " + listeInv);
                  break;
 
-                case "PRV" : //Permet d'envoyer
+                case "PRV" : //Permet d'envoyer un message prive a un autre utilisateur tant qu'ils partagent un salon
 
                     aliasExpediteur = cnx.getAlias();
                     String arg = evenement.getArgument();
@@ -118,6 +118,20 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         serveur.envoyerA(alias2, ">> " + msg);
                     } else {
                         serveur.envoyerA(aliasExpediteur, "Salon inexistant");
+                    }
+                    break;
+
+                case "QUIT":
+                    aliasExpediteur = cnx.getAlias();
+                    alias2 = evenement.getArgument();
+
+                    SalonPrive salon = new SalonPrive(aliasExpediteur, alias2);
+
+                    if (serveur.existeSalon(aliasExpediteur,alias2)) {
+                        serveur.supprimerSalonPrive(salon);
+                        cnx.envoyer("Vous avez quitté le salon privé avec " + alias2);
+                    } else {
+                        cnx.envoyer("Aucun salon privé avec " + alias2 + " trouvé.");
                     }
 
 

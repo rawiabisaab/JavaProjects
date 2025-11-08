@@ -125,6 +125,8 @@ public class ServeurChat extends Serveur {
         historique.add(msg);
     }
 
+    //Methodes de manipulation d'invitations
+
     public boolean existeInvitation(String host, String guest) {
         return invitations.contains(new Invitation(host, guest));
     }
@@ -138,11 +140,6 @@ public class ServeurChat extends Serveur {
         Invitation inv = new Invitation(host, guest);
         invitations.remove(inv);
     }
-
-    public void creerSalonPrive(String alias1, String alias2) {
-        salonsPrives.add(new SalonPrive(alias1, alias2));
-    }
-
     public String listeInvitations(String alias){
         StringBuilder sb = new StringBuilder();
         for (Invitation inv:invitations){
@@ -153,11 +150,19 @@ public class ServeurChat extends Serveur {
         return sb.toString();
     }
 
+    //Methodes de manipulation de salons
+    public void creerSalonPrive(String alias1, String alias2) {
+        salonsPrives.add(new SalonPrive(alias1, alias2));
+    }
+
     public boolean existeSalon(String host, String guest) {
         SalonPrive salonRecherche = new SalonPrive(host, guest);
         return salonsPrives.contains(salonRecherche);
     }
 
+    public boolean supprimerSalonPrive(SalonPrive salon) {
+        return salonsPrives.remove(salon);
+    }
 
 }
 
