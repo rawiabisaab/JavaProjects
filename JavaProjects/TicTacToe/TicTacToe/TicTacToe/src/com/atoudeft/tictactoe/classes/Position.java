@@ -13,5 +13,19 @@ public final class Position {
     public int getLigne()   { return ligne; }
     public int getColonne() { return colonne; }
 
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position)) return false;
+        Position other = (Position) o;
+        return ligne == other.ligne && colonne == other.colonne;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * ligne + colonne;
+    }
+
     @Override public String toString() { return "(" + ligne + "," + colonne + ")"; }
 }
