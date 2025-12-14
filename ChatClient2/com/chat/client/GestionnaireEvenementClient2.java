@@ -5,6 +5,7 @@ import com.chat.commun.evenement.GestionnaireEvenement;
 import com.chat.commun.net.Connexion;
 import com.chat.tictactoe.EtatPartieTicTacToe;
 import com.chat.programme.MainFrame;
+import controleur.EcouteurTicTacToe;
 import vue.FenetreTicTacToe;
 import vue.PanneauPrincipal;
 import vue.PanneauTicTacToe;
@@ -145,15 +146,27 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 case "TTTOK":
                     arg = evenement.getArgument();
-                    str = arg.substring(arg.indexOf(" ")+1);
-                    arg = arg.substring(0,arg.indexOf(" "));
-                    client.nouvellePartie();
-                    System.out.println("Partie d'échecs démarrée avec "+arg+". Votre couleur est : "+str);
-                    System.out.println(client.getEtatPartieTicTacToe());
-                    PanneauTicTacToe panneauTicTacToe = new PanneauTicTacToe(client.getEtatPartieTicTacToe());
-                    //à compléter
+                    str = arg.substring(arg.indexOf(" ") + 1);
+                    arg = arg.substring(0, arg.indexOf(" "));
 
-                    panneauPrincipal.setFenetreTicTacToe(arg,fenetreTicTacToe);
+                    client.nouvellePartie();
+
+                    System.out.println("Partie d'échecs démarrée avec " + arg + ". Votre couleur est : " + str);
+                    System.out.println(client.getEtatPartieTicTacToe());
+
+                    PanneauTicTacToe panneauTicTacToe = new PanneauTicTacToe(client.getEtatPartieTicTacToe());
+
+                    EcouteurTicTacToe ecouteurTTT = new EcouteurTicTacToe(client);
+                    panneauTicTacToe.setEcouteurTicTacToe(ecouteurTTT);
+
+
+                    String titre = "Vous (" + str + ") contre " + arg;
+                    fenetreTicTacToe = new FenetreTicTacToe(panneauTicTacToe, titre);
+                    fenetreTicTacToe.setContentPane(panneauTicTacToe);
+                    fenetreTicTacToe.pack();
+                    fenetreTicTacToe.setVisible(true);
+
+                    panneauPrincipal.setFenetreTicTacToe(arg, fenetreTicTacToe);
                     break;
                 case "INVALID":
                     System.out.println(evenement.getArgument());

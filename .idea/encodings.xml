@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ChatClient2/com/chat/client/Client.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/ChatClient2/com/chat/tictactoe/EtatPartieTicTacToe.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/ChatClient2/controleur/EcouteurTicTacToe.java" charset="ISO-8859-1" />
   </component>
 </project>
