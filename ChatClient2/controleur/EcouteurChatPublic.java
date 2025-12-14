@@ -1,6 +1,6 @@
 package controleur;
 
-import com.chat.client.ClientChat;
+import modele.ClientChat;
 import vue.PanneauChat;
 import java.awt.event.*;
 

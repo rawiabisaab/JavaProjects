@@ -1,6 +1,7 @@
 package controleur;
 
-import com.chat.client.ClientChat;
+
+import modele.ClientChat;
 import javax.swing.*;
 import java.awt.event.*;
 
