@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Downloads/ChatClient2/ChatClient2.iml" filepath="$USER_HOME$/Downloads/ChatClient2/ChatClient2.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaProjects/ChatServer/ChatServer.iml" filepath="$PROJECT_DIR$/JavaProjects/ChatServer/ChatServer.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/ChatServer2/ChatServer2.iml" filepath="$USER_HOME$/Downloads/ChatServer2/ChatServer2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/JavaProjects.iml" filepath="$PROJECT_DIR$/.idea/JavaProjects.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaProjects/TicTacToe/TicTacToe.iml" filepath="$PROJECT_DIR$/JavaProjects/TicTacToe/TicTacToe.iml" />
     </modules>
